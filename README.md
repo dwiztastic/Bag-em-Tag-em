@@ -1,4 +1,4 @@
-# Kattspel
+# Bag em & Tag em
 
 Ett extraction-spel där man jagar katter. Det byggs för webbläsaren och ska sedan bli en app för iOS och Android.
 

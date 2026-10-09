@@ -9,3 +9,4 @@ Fas 0 är klar. Speldesignen är intervjuad och dokumenterad, och repot är skap
 
 ## Logg
 - 2026-10-09: Intervju del 1–3 genomförd. `CLAUDE.md` och speldesignen skapade.
+- 2026-10-09: Namnet bestämt: Bag em & Tag em. Repot pushat till GitHub (dwiztastic/Bag-em-Tag-em, privat).

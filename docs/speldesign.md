@@ -1,6 +1,6 @@
 # Speldesign
 
-Arbetsnamn: Kattspel. Underlaget kommer från en intervju 2026-10-09.
+Spelets namn: **Bag em & Tag em** (beslutat 2026-10-09). Underlaget kommer från en intervju 2026-10-09.
 
 ## I en mening
 Ett extraction-spel där man jagar katter. Du har 5–10 minuter på en bana för att fånga
@@ -64,4 +64,3 @@ så värdefulla katter som möjligt och ta dig ut. Hinner du inte ut förlorar d
 - Räknas dubbletter av samma katt i poängen, eller bara unika katter?
 - Grafik: AI-genererad, köpta grafikpaket eller egen?
 - Finns tillgång till en Mac för iOS-bygget, eller ska vi använda en molntjänst?
-- Vad ska spelet heta?

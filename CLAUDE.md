@@ -1,4 +1,4 @@
-# Kattspel – arbetsinstruktioner för Claude Code
+# Bag em & Tag em – arbetsinstruktioner för Claude Code
 
 Ett extraction-spel där man jagar katter. Byggs först för webbläsaren, sedan som app
 för iOS och Android. Ägaren har ingen spelutvecklingsvana – Claude Code bygger,
