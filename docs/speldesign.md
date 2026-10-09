@@ -99,12 +99,8 @@ snabbt mätaren fylls. Detta prövas i prototypen.
 
 ## Öppna frågor
 - Vilken grafikstil gäller? Rekommendationen ovan behöver ägarens godkännande.
-- Lista med raser: vilka 10 raser, vilka färger och vilka legendariska. Claude tar fram ett utkast.
-- Lista med godis: vilka typer och vilket godis som lockar vilken ras.
-- Vilka uppdrag ska finnas? Ett exempel är "Fånga 3 röda katter".
-- Hur många dubbletter krävs för att byta till godis?
+- Lista med raser, godis, uppdrag och banor: utkast finns i `docs/katter.md`. Ägaren har inte godkänt det.
 - Ska det finnas en veckotopplista utöver den totala?
-- Vilka 3 banor ska finnas: två villaområden och en stad, eller tvärtom?
 - Hur mycket är säcken värd i poäng? Exakta värden per sällsynthetsnivå sätts i prototypen.
 
 ## Faser
