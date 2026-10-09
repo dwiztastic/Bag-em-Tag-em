@@ -1,0 +1,503 @@
+<title>Stilprov Bag em &amp; Tag em</title>
+<meta name="description" content="Samma scen i fyra grafiska stilar, graderade efter hur svåra de är att ta fram med enbart AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@600&family=Gochi+Hand&family=Lilita+One&family=Press+Start+2P&display=swap">
+<style>
+/* Layout: en stilbok – varje stil är ett uppslag med scenen bredvid betyg och förklaring, sedan jämförelse och rekommendation */
+:root {
+  --bg: #eef1ec;
+  --surface: #ffffff;
+  --ink: #1c2420;
+  --muted: #56625b;
+  --line: #d3dad3;
+  --accent: #2f6f8f;
+  --easy: #3f8a4a;
+  --mid: #b07a0e;
+  --hard: #c2452d;
+  --font-display: "Lilita One", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a17; --surface: #1c2420; --ink: #e8eee9; --muted: #9aa79f; --line: #2e3833;
+    --accent: #6fb2d2; --easy: #6cc27a; --mid: #e0aa3a; --hard: #e8735a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a17; --surface: #1c2420; --ink: #e8eee9; --muted: #9aa79f; --line: #2e3833;
+  --accent: #6fb2d2; --easy: #6cc27a; --mid: #e0aa3a; --hard: #e8735a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 1rem; line-height: 1.55;
+  padding-inline: 16px; padding-block: 32px 64px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 56px; }
+header { display: grid; gap: 12px; max-width: 68ch; }
+.eyebrow { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+.lede { font-size: 1.1rem; color: var(--muted); }
+.note { border-left: 3px solid var(--accent); padding-left: 14px; color: var(--muted); font-size: .95rem; }
+
+.style { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 820px) { .style { grid-template-columns: minmax(0, 1fr); } }
+.scene { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; display: block; background: #6aa84f; box-shadow: 0 1px 0 var(--line), 0 10px 30px -18px rgba(0,0,0,.45); }
+.info { display: grid; gap: 16px; min-width: 0; }
+.title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.title-row .en { color: var(--muted); font-size: .9rem; }
+
+.meter { display: grid; gap: 6px; }
+.meter-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; max-width: 220px; }
+.meter-bar span { height: 10px; border-radius: 2px; background: var(--line); }
+.meter[data-level="easy"] .on { background: var(--easy); }
+.meter[data-level="mid"] .on { background: var(--mid); }
+.meter[data-level="hard"] .on { background: var(--hard); }
+.meter-label { font-weight: 700; font-variant-numeric: tabular-nums; }
+.meter[data-level="easy"] .meter-label { color: var(--easy); }
+.meter[data-level="mid"] .meter-label { color: var(--mid); }
+.meter[data-level="hard"] .meter-label { color: var(--hard); }
+
+.info h4 { margin: 0 0 4px; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.info ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.prompt { display: grid; gap: 6px; }
+.prompt code { display: block; font-size: .82rem; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; color: var(--ink); }
+.copy { justify-self: start; font: inherit; font-size: .85rem; font-weight: 700; color: var(--accent); background: none; border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section.block { display: grid; gap: 18px; }
+.hard-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.hard-list div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 6px; align-content: start; }
+.hard-list strong { font-size: 1rem; }
+.hard-list p { color: var(--muted); font-size: .95rem; }
+.big { font-family: var(--font-display); font-size: 1.6rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: .93rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .75rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.pick { background: var(--surface); border: 2px solid var(--accent); border-radius: 12px; padding: 20px; display: grid; gap: 10px; max-width: 75ch; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Bag em &amp; Tag em · grafikval</div>
+    <h1>Samma bakgård, fyra stilar</h1>
+    <p class="lede">Varje bild visar samma ögonblick: kattfångaren med håv och säck, en vanlig huskatt, en sällsynt siames med skrämselmätaren igång, en gyllene katt och en arg hund på väg. Under varje bild står hur svårt stilen är att ta fram med enbart AI, och vad som behövs utöver AI.</p>
+    <p class="note">Bilderna är stilprov som Claude har ritat med kod, inte AI-genererade bilder. De visar känslan och läsbarheten i varje stil. Vill du se vad en AI-bildtjänst ger kan du kopiera prompten under varje stil och klistra in den i en sådan tjänst.</p>
+  </header>
+
+  <article class="style" id="platt">
+    <canvas class="scene" data-style="flat" width="1280" height="720" role="img" aria-label="Platt tecknad stil: rena färgfält utan konturer"></canvas>
+    <div class="info">
+      <div class="title-row"><h2>Platt tecknad</h2><span class="en">Flat cartoon / vektor</span></div>
+      <div class="meter" data-level="easy">
+        <div class="meter-bar" aria-hidden="true"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div>
+        <div class="meter-label">AI-svårighet 2 av 5 · lätt–medel</div>
+      </div>
+      <div><h4>Varför</h4><ul>
+        <li>Få detaljer gör det lätt att hålla stilen enhetlig över 30 katter.</li>
+        <li>AI-bilderna kan göras om till vektorer (SVG). Claude kan också rita figurerna direkt i kod, som i den här bilden.</li>
+        <li>Figurerna animeras genom att delar vrids och flyttas (huvud, svans, ben). Då behöver inga bildrutor ritas en och en.</li>
+        <li>Färgvarianter går att lägga på i koden utan extra bilder.</li>
+      </ul></div>
+      <div><h4>Utöver AI krävs</h4><ul>
+        <li>Ett vektorprogram som Inkscape (gratis) eller Figma för att städa bilderna och dela upp dem i rörliga delar.</li>
+        <li>Ungefär en kvälls arbete per figur.</li>
+        <li>Risk: stilen kan bli anonym och likna många andra mobilspel. Humorn måste bäras av rörelser och ljud.</li>
+      </ul></div>
+      <div class="prompt"><h4>Testa själv</h4><code id="p1">Top-down 3/4 view game sprite, flat vector cartoon style, no outlines, a grey tabby cat sitting, simple shapes, bold flat colors, soft drop shadow, transparent background, mobile game asset</code><button class="copy" data-for="p1" type="button">Kopiera prompt</button></div>
+    </div>
+  </article>
+
+  <article class="style" id="pixel">
+    <canvas class="scene" data-style="pixel" width="1280" height="720" role="img" aria-label="Pixelgrafik: låg upplösning med begränsad färgpalett"></canvas>
+    <div class="info">
+      <div class="title-row"><h2>Pixelgrafik</h2><span class="en">Pixel art, 16-bit</span></div>
+      <div class="meter" data-level="mid">
+        <div class="meter-bar" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+        <div class="meter-label">AI-svårighet 3 av 5 · medel</div>
+      </div>
+      <div><h4>Varför</h4><ul>
+        <li>AI ger ofta "falska pixlar": pixlar i olika storlek, suddiga kanter och för många färger. Varje bild behöver städas.</li>
+        <li>Animationer ritas bild för bild, och AI har svårt att hålla figuren likadan mellan rutorna.</li>
+        <li>Miljöerna finns att köpa färdiga och enhetliga för villaområde och stad. Då behöver AI bara ta fram katterna och gubben.</li>
+        <li>Figurerna är små, så det blir lite att rita, och färgvarianterna är gratis genom palettbyte.</li>
+      </ul></div>
+      <div><h4>Utöver AI krävs</h4><ul>
+        <li>Aseprite (ett pixelprogram, cirka 200 kr) för att städa och animera.</li>
+        <li>Ett köpt miljöpaket för villaområde och stad.</li>
+        <li>Gärna en pixelartist för de 10 raserna och gubben. Begär offert, priserna varierar mycket.</li>
+      </ul></div>
+      <div class="prompt"><h4>Testa själv</h4><code id="p2">16-bit pixel art sprite, top-down 3/4 view like Stardew Valley, a siamese cat sneaking, limited 16 color palette, crisp pixels, no anti-aliasing, transparent background, game asset</code><button class="copy" data-for="p2" type="button">Kopiera prompt</button></div>
+    </div>
+  </article>
+
+  <article class="style" id="tusch">
+    <canvas class="scene" data-style="ink" width="1280" height="720" role="img" aria-label="Handritad stil: darriga tuschkonturer och akvarellfärg på papper"></canvas>
+    <div class="info">
+      <div class="title-row"><h2>Handritad tusch</h2><span class="en">Hand-drawn ink &amp; wash</span></div>
+      <div class="meter" data-level="hard">
+        <div class="meter-bar" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
+        <div class="meter-label">AI-svårighet 4 av 5 · svår</div>
+      </div>
+      <div><h4>Varför</h4><ul>
+        <li>AI varierar linjetjocklek, skuggning och papperskänsla från bild till bild. Det märks direkt när 30 katter står bredvid varandra.</li>
+        <li>Handritat ser falskt ut när rutorna i en animation inte stämmer med varandra.</li>
+        <li>Färgvarianter fungerar sämre, eftersom skuggor och struktur är inritade i färgen.</li>
+        <li>Stilen är personlig och busig och sticker ut i butiken.</li>
+      </ul></div>
+      <div><h4>Utöver AI krävs</h4><ul>
+        <li>En illustratör, eller egen vana att teckna, och en ritplatta.</li>
+        <li>Mycket mer tid per figur och per animation.</li>
+        <li>Alternativt: AI-skisser som en illustratör ritar om i en enhetlig stil.</li>
+      </ul></div>
+      <div class="prompt"><h4>Testa själv</h4><code id="p3">Hand-drawn ink and watercolor game sprite, wobbly black ink outlines, loose watercolor fill on paper texture, top-down 3/4 view, a grumpy cat catcher with a net and a sack, humorous, transparent background</code><button class="copy" data-for="p3" type="button">Kopiera prompt</button></div>
+    </div>
+  </article>
+
+  <article class="style" id="lera">
+    <canvas class="scene" data-style="clay" width="1280" height="720" role="img" aria-label="Lera och 3D-renderad stil: mjuka former med ljus och skugga"></canvas>
+    <div class="info">
+      <div class="title-row"><h2>Lera / 3D-renderad</h2><span class="en">Clay / pre-rendered 3D</span></div>
+      <div class="meter" data-level="hard">
+        <div class="meter-bar" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+        <div class="meter-label">AI-svårighet 5 av 5 · mycket svår</div>
+      </div>
+      <div><h4>Varför</h4><ul>
+        <li>AI-verktyg för 3D (till exempel Meshy och Tripo) ger modeller, men utan skelett och rörelser, och ofta med trasig geometri.</li>
+        <li>Varje katt måste få ett skelett, animeras och renderas till bilder i 3D-programmet Blender.</li>
+        <li>När en katt är riggad får man alla vinklar, rutor och färger gratis. Det är också en bro om spelet blir 3D senare.</li>
+      </ul></div>
+      <div><h4>Utöver AI krävs</h4><ul>
+        <li>Blender (gratis) och betydande 3D-kunskap: modellering, rigg, animation och rendering. Tröskeln är hög.</li>
+        <li>Alternativt en 3D-artist, och det är det dyraste alternativet.</li>
+        <li>Större bildfiler, vilket ger längre laddtid i webbläsaren.</li>
+      </ul></div>
+      <div class="prompt"><h4>Testa själv</h4><code id="p4">Cute clay 3D render, claymation style game character, top-down 3/4 view, a golden fluffy cat sleeping, soft studio lighting, plasticine texture, isolated on transparent background</code><button class="copy" data-for="p4" type="button">Kopiera prompt</button></div>
+    </div>
+  </article>
+
+  <section class="block">
+    <h2>Det här är svårt med AI oavsett stil</h2>
+    <div class="hard-list">
+      <div><span class="big">600</span><strong>Bildrutor för katterna</strong><p>10 raser × 5 rörelser (sitta, gå, springa, fly, fångad) × 3 riktningar (den fjärde speglas) × 4 rutor. Färgvarianterna kostar inget extra om de läggs på i koden.</p></div>
+      <div><span class="big">30</span><strong>Katter som ska se ut att höra ihop</strong><p>AI ritar varje bild för sig. Att hålla samma proportioner, linjer och ljus genom hela albumet är det största arbetet.</p></div>
+      <div><span class="big">3/4</span><strong>Vinkeln ovanifrån</strong><p>AI-modeller har mest sett djur från sidan. Snett ovanifrån, som i Stardew Valley, fungerar bättre än rakt ovanifrån.</p></div>
+      <div><span class="big">1</span><strong>Rutnät för allt</strong><p>Varje bild ska frilägas, få samma storlek och samma fotpunkt. Annars hoppar figurerna när animationen spelas.</p></div>
+      <div><span class="big">§</span><strong>Rätten till bilderna</strong><p>Kontrollera att AI-tjänstens villkor tillåter att bilderna säljs i ett spel. Apple och Google kräver att du har rätt till allt i appen.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Jämförelse</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Stil</th><th>AI-svårighet</th><th>Animation</th><th>Färgvarianter</th><th>Verktyg utöver AI</th><th>Känsla</th></tr></thead>
+        <tbody>
+          <tr><td>Platt tecknad</td><td class="num">2 / 5</td><td>Delar som rör sig. Få bilder.</td><td>Gratis i koden</td><td>Inkscape eller Figma</td><td>Ren, tydlig, lite anonym</td></tr>
+          <tr><td>Pixelgrafik</td><td class="num">3 / 5</td><td>Bild för bild, men små bilder</td><td>Gratis via palettbyte</td><td>Aseprite och ett miljöpaket</td><td>Retro, charmig, förlåtande</td></tr>
+          <tr><td>Handritad tusch</td><td class="num">4 / 5</td><td>Bild för bild, kräver precision</td><td>Fungerar sämre</td><td>Illustratör och ritplatta</td><td>Personlig, busig, sticker ut</td></tr>
+          <tr><td>Lera / 3D</td><td class="num">5 / 5</td><td>Renderas från en rigg</td><td>Gratis via material</td><td>Blender och 3D-kunskap</td><td>Påkostad, mjuk, tung att ladda</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="pick">
+    <h2>Rekommendation</h2>
+    <p><strong>Vill du klara mest med AI: platt tecknad.</strong> Det är den enda stilen där AI och Claude tillsammans kan ta fram nästan allt. Rörelser byggs av delar i stället för hundratals bildrutor.</p>
+    <p><strong>Kan du tänka dig att köpa ett miljöpaket och anlita en pixelartist för 10 katter: pixelgrafik.</strong> Stilen är mest förlåtande och billigast att få enhetlig, och den passar busig humor.</p>
+    <p>Handritat och lera blir snyggast, men kräver en människa som kan rita eller arbeta i 3D. De passar bättre när spelet har visat att det är roligt.</p>
+  </section>
+</div>
+
+<script>
+(() => {
+  const W = 640, H = 360;
+  const hex2rgb = h => { h = h.replace('#', ''); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+  const rgb2hex = a => '#' + a.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+  const mix = (a, b, t) => { const A = hex2rgb(a), B = hex2rgb(b); return rgb2hex(A.map((v, i) => v + (B[i] - v) * t)); };
+  const lighten = (c, t) => mix(c, '#ffffff', t), darken = (c, t) => mix(c, '#000000', t);
+  const rng = s => () => (s = (s * 16807) % 2147483647, (s - 1) / 2147483646);
+
+  function rrPath(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+  function curve(ctx, p) {
+    ctx.beginPath(); ctx.moveTo(p[0][0], p[0][1]);
+    if (p.length === 2) ctx.lineTo(p[1][0], p[1][1]);
+    for (let i = 1; i < p.length - 1; i++) {
+      const last = i === p.length - 2;
+      const mx = last ? p[i + 1][0] : (p[i][0] + p[i + 1][0]) / 2, my = last ? p[i + 1][1] : (p[i][1] + p[i + 1][1]) / 2;
+      ctx.quadraticCurveTo(p[i][0], p[i][1], mx, my);
+    }
+  }
+
+  /* ---------- Scenen: samma innehåll för alla stilar ---------- */
+  const C = {
+    grass: '#6aa84f', grass2: '#76b65a', path: '#d6cdb8', pathLine: '#b9ae97', roof: '#b4553f', ridge: '#8f3f2f',
+    fence: '#dcbc8c', post: '#b48f5c', bush: '#3f7a34', bush2: '#57983f', tramp: '#3d7fc4', mat: '#22292f',
+    grill: '#2b2b2b', grill2: '#5a5a5a', hud: '#1d2421', white: '#ffffff', yellow: '#f2c230', red: '#e2553a',
+    tabby: '#8d8f93', stripe: '#5d5f64', siam: '#efe2c8', point: '#4a3a32', gold: '#e8b622', gold2: '#fff3b0',
+    dog: '#8a5a3b', dog2: '#5e3b25', skin: '#f0c7a0', jacket: '#2f6f8f', hat: '#c9a227', sack: '#b08a57', sack2: '#8a6a3f',
+    eye: '#1b1b1b', blue: '#3b82c4', pink: '#e98a9a', pole: '#6b4a2b', net: '#efefef'
+  };
+
+  function cat(d, x, y, s, body, accent, kind) {
+    d.shadow(x + 2, y + 13 * s, 15 * s, 5 * s);
+    d.line([[x + 10 * s, y + 7 * s], [x + 22 * s, y + 2 * s], [x + 20 * s, y - 10 * s]], body, 5 * s);
+    d.ellipse(x, y + 4 * s, 13 * s, 10 * s, body);
+    d.poly([[x - 10 * s, y - 11 * s], [x - 8 * s, y - 22 * s], [x - 1 * s, y - 15 * s]], kind === 'siam' ? accent : body);
+    d.poly([[x + 10 * s, y - 11 * s], [x + 8 * s, y - 22 * s], [x + 1 * s, y - 15 * s]], kind === 'siam' ? accent : body);
+    d.ellipse(x, y - 8 * s, 10.5 * s, 9 * s, body);
+    if (kind === 'tabby') { d.rect(x - 4 * s, y - 16 * s, 2 * s, 5 * s, accent); d.rect(x - 1 * s, y - 17 * s, 2 * s, 6 * s, accent); d.rect(x + 2 * s, y - 16 * s, 2 * s, 5 * s, accent); d.rect(x - 9 * s, y + 2 * s, 18 * s, 2.4 * s, accent); }
+    if (kind === 'siam') d.ellipse(x, y - 5 * s, 6 * s, 5 * s, accent);
+    const eye = kind === 'siam' ? C.blue : C.eye;
+    d.ellipse(x - 4.2 * s, y - 9 * s, 1.8 * s, 2.2 * s, eye);
+    d.ellipse(x + 4.2 * s, y - 9 * s, 1.8 * s, 2.2 * s, eye);
+    d.ellipse(x, y - 5.5 * s, 1.4 * s, 1 * s, C.pink);
+  }
+  function tag(d, x, y, label, col, fg) {
+    const w = label.length * 7 + 16;
+    d.rect(x - w / 2, y - 9, w, 18, col, 9);
+    d.text(label, x, y + 0.5, 10, fg);
+  }
+
+  function scene(d) {
+    d.rect(0, 0, W, H, C.grass);
+    for (let i = 0; i < 8; i++) d.rect(170 + i * 60, 26, 30, 236, C.grass2);
+    // hus och staket
+    d.rect(0, 0, 170, 124, C.roof);
+    d.rect(0, 56, 170, 10, C.ridge);
+    d.rect(170, 0, 470, 26, C.fence);
+    for (let x = 178; x < 640; x += 38) d.rect(x, 0, 8, 30, C.post);
+    // gångväg
+    d.rect(0, 262, 640, 42, C.path);
+    for (let x = 30; x < 640; x += 52) d.rect(x, 262, 3, 42, C.pathLine);
+    // buskar
+    [[30, 165, 30], [70, 196, 26], [26, 228, 22], [612, 196, 30], [585, 226, 20]].forEach(([x, y, r]) => {
+      d.shadow(x + 4, y + r * .7, r, r * .35); d.ellipse(x, y, r, r * .85, C.bush); d.ellipse(x - r * .25, y - r * .25, r * .55, r * .45, C.bush2);
+    });
+    // studsmatta
+    d.shadow(486, 196, 66, 16);
+    d.ellipse(480, 140, 62, 58, C.tramp);
+    d.ellipse(480, 140, 50, 46, C.mat);
+    // grill
+    d.shadow(252, 104, 24, 7);
+    d.ellipse(250, 86, 21, 20, C.grill);
+    d.ellipse(250, 84, 15, 14, C.grill2);
+    for (let i = -8; i <= 8; i += 5) d.rect(240, 84 + i, 20, 2, C.grill);
+    // utgång
+    d.rect(578, 266, 56, 32, C.yellow, 7);
+    d.text('EXIT', 600, 283, 13, C.hud);
+    d.poly([[620, 276], [630, 283], [620, 290]], C.hud);
+    // hund
+    d.shadow(150, 300, 30, 7);
+    d.line([[124, 282], [112, 272], [108, 262]], C.dog, 6);
+    d.ellipse(146, 284, 24, 15, C.dog);
+    d.ellipse(170, 274, 14, 13, C.dog);
+    d.ellipse(160, 268, 5, 10, C.dog2);
+    d.ellipse(181, 268, 5, 10, C.dog2);
+    d.ellipse(176, 282, 4, 5, C.pink);
+    d.line([[163, 266], [170, 269]], C.eye, 2.5);
+    d.line([[177, 266], [171, 269]], C.eye, 2.5);
+    d.line([[200, 260], [216, 256]], C.hud, 2.5);
+    d.line([[202, 272], [220, 272]], C.hud, 2.5);
+    // kattfångaren
+    const px = 330, py = 214;
+    d.shadow(px + 2, py + 26, 26, 8);
+    d.ellipse(px - 22, py + 6, 13, 15, C.sack);
+    d.rect(px - 26, py - 10, 8, 5, C.sack2, 2);
+    d.rect(px - 9, py + 12, 7, 14, C.hud, 3);
+    d.rect(px + 2, py + 12, 7, 14, C.hud, 3);
+    d.rect(px - 15, py - 10, 30, 26, C.jacket, 9);
+    d.line([[px + 12, py - 2], [px + 46, py - 26]], C.pole, 4);
+    d.ring(px + 56, py - 34, 13, C.net, 3);
+    d.ellipse(px, py - 20, 11, 10, C.skin);
+    d.ellipse(px, py - 27, 19, 7, C.hat);
+    d.ellipse(px, py - 31, 11, 8, darken(C.hat, .12));
+    d.ellipse(px - 4, py - 19, 1.6, 2, C.eye);
+    d.ellipse(px + 4, py - 19, 1.6, 2, C.eye);
+    // katter
+    cat(d, 196, 158, 1.15, C.tabby, C.stripe, 'tabby');
+    cat(d, 540, 236, 1.2, C.siam, C.point, 'siam');
+    tag(d, 540, 196, 'RARE', C.blue, C.white);
+    d.rect(518, 182 - 0, 44, 7, C.hud, 3);
+    d.rect(519, 183, 27, 5, C.red, 2);
+    cat(d, 392, 124, 1.2, C.gold, darken(C.gold, .25), 'gold');
+    d.star(412, 98, 6, C.gold2);
+    d.star(370, 112, 4, C.gold2);
+    tag(d, 392, 84, 'GOLDEN', C.gold, C.hud);
+    // HUD
+    d.rect(274, 12, 92, 30, C.hud, 15);
+    d.text('3:42', 320, 28, 17, C.white);
+    d.rect(512, 12, 116, 30, C.hud, 15);
+    d.text('SACK 4/6', 570, 28, 13, C.yellow);
+    d.rect(14, 318, 124, 30, C.hud, 15);
+    d.text('CATNIP x1', 76, 334, 12, C.white);
+  }
+
+  /* ---------- Renderare ---------- */
+  function starPts(x, y, r) { const p = []; for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4 - Math.PI / 2, rr = i % 2 ? r * .35 : r; p.push([x + Math.cos(a) * rr, y + Math.sin(a) * rr]); } return p; }
+
+  function flat(ctx, font) {
+    const d = {
+      rect(x, y, w, h, c, r = 0) { ctx.fillStyle = c; rrPath(ctx, x, y, w, h, r); ctx.fill(); },
+      ellipse(x, y, rx, ry, c) { ctx.fillStyle = c; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill(); },
+      poly(p, c) { ctx.fillStyle = c; ctx.beginPath(); p.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath(); ctx.fill(); },
+      line(p, c, w) { ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; curve(ctx, p); ctx.stroke(); },
+      ring(x, y, r, c, w) { ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); },
+      shadow(x, y, rx, ry) { ctx.fillStyle = 'rgba(20,50,20,.2)'; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill(); },
+      text(s, x, y, size, c) { ctx.fillStyle = c; ctx.font = `${size + 2}px ${font}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(s, x, y + 1); },
+      star(x, y, r, c) { d.poly(starPts(x, y, r), c); }
+    };
+    return d;
+  }
+
+  function clay(ctx) {
+    const grad = (cx, cy, rx, ry, c) => {
+      const g = ctx.createRadialGradient(cx - rx * .35, cy - ry * .45, 1, cx, cy, Math.max(rx, ry) * 1.2);
+      g.addColorStop(0, lighten(c, .35)); g.addColorStop(.55, c); g.addColorStop(1, darken(c, .32)); return g;
+    };
+    const hi = (x, y, rx, ry) => { ctx.fillStyle = 'rgba(255,255,255,.42)'; ctx.beginPath(); ctx.ellipse(x - rx * .35, y - ry * .45, rx * .28, ry * .17, -.4, 0, Math.PI * 2); ctx.fill(); };
+    const d = {
+      rect(x, y, w, h, c, r = 0) {
+        if (w * h > 30000) { ctx.fillStyle = c; rrPath(ctx, x, y, w, h, r); ctx.fill(); return; }
+        ctx.fillStyle = grad(x + w / 2, y + h / 2, w / 2, h / 2, c); rrPath(ctx, x, y, w, h, Math.max(r, Math.min(w, h) * .25)); ctx.fill();
+      },
+      ellipse(x, y, rx, ry, c) { ctx.fillStyle = grad(x, y, rx, ry, c); ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill(); if (rx > 6) hi(x, y, rx, ry); },
+      poly(p, c) {
+        const xs = p.map(q => q[0]), ys = p.map(q => q[1]);
+        const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+        ctx.fillStyle = grad(cx, cy, (Math.max(...xs) - Math.min(...xs)) / 2 + 1, (Math.max(...ys) - Math.min(...ys)) / 2 + 1, c);
+        ctx.lineJoin = 'round'; ctx.beginPath(); p.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath(); ctx.fill();
+      },
+      line(p, c, w) { ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = darken(c, .2); ctx.lineWidth = w; curve(ctx, p); ctx.stroke(); ctx.strokeStyle = lighten(c, .25); ctx.lineWidth = w * .4; ctx.save(); ctx.translate(-w * .15, -w * .2); curve(ctx, p); ctx.stroke(); ctx.restore(); },
+      ring(x, y, r, c, w) { ctx.strokeStyle = darken(c, .2); ctx.lineWidth = w + 1; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); ctx.strokeStyle = c; ctx.lineWidth = w * .5; ctx.beginPath(); ctx.arc(x - .6, y - .8, r, Math.PI, Math.PI * 1.8); ctx.stroke(); },
+      shadow(x, y, rx, ry) {
+        ctx.save(); ctx.translate(x + 4, y + 2); ctx.scale(1, ry / rx);
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx * 1.25); g.addColorStop(0, 'rgba(10,30,10,.42)'); g.addColorStop(1, 'rgba(10,30,10,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, rx * 1.25, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      },
+      text(s, x, y, size, c) { ctx.font = `600 ${size + 1}px Fredoka, system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fillText(s, x + 1, y + 2); ctx.fillStyle = c; ctx.fillText(s, x, y + 1); },
+      star(x, y, r, c) { d.poly(starPts(x, y, r), c); }
+    };
+    return d;
+  }
+
+  function ink(ctx) {
+    const INK = '#2b2420', PAPER = '#f3ecdc';
+    const r = rng(11);
+    const j = a => (r() - .5) * a;
+    const tint = c => mix(c, PAPER, .22);
+    const ellPts = (x, y, rx, ry) => { const n = Math.max(14, Math.round((rx + ry) / 1.5)); const p = []; for (let i = 0; i <= n; i++) { const a = i / n * Math.PI * 2 + .2; p.push([x + Math.cos(a) * (rx + j(1.6)), y + Math.sin(a) * (ry + j(1.6))]); } return p; };
+    const sub = p => { const out = []; for (let i = 0; i < p.length; i++) { const a = p[i], b = p[(i + 1) % p.length]; const len = Math.hypot(b[0] - a[0], b[1] - a[1]); const n = Math.max(2, Math.round(len / 8)); for (let k = 0; k < n; k++) out.push([a[0] + (b[0] - a[0]) * k / n + j(1.4), a[1] + (b[1] - a[1]) * k / n + j(1.4)]); } out.push(out[0]); return out; };
+    const path = p => { ctx.beginPath(); p.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); };
+    const fillOutline = (pts, c, outline = true) => {
+      ctx.fillStyle = tint(c); ctx.globalAlpha = .92; ctx.save(); ctx.translate(1.6, 1.2); path(pts); ctx.fill(); ctx.restore(); ctx.globalAlpha = 1;
+      if (!outline) return;
+      ctx.strokeStyle = INK; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.lineWidth = 1.7; path(pts); ctx.stroke();
+      ctx.lineWidth = .8; ctx.globalAlpha = .6; path(pts.map(([x, y]) => [x + j(1.2), y + j(1.2)])); ctx.stroke(); ctx.globalAlpha = 1;
+    };
+    const d = {
+      rect(x, y, w, h, c, rr = 0) {
+        if (w * h > 30000) { ctx.fillStyle = tint(c); ctx.fillRect(x, y, w, h); return; }
+        fillOutline(sub([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]), c, w > 4 && h > 4);
+      },
+      ellipse(x, y, rx, ry, c) { fillOutline(ellPts(x, y, rx, ry), c, rx > 2.5); },
+      poly(p, c) { fillOutline(sub(p), c); },
+      line(p, c, w) { ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = INK; ctx.lineWidth = w + 3; curve(ctx, p); ctx.stroke(); ctx.strokeStyle = tint(c); ctx.lineWidth = w; curve(ctx, p); ctx.stroke(); },
+      ring(x, y, rad, c, w) { const p = ellPts(x, y, rad, rad); ctx.strokeStyle = INK; ctx.lineWidth = w + 2.4; path(p); ctx.stroke(); ctx.strokeStyle = tint(c); ctx.lineWidth = w; path(p); ctx.stroke(); },
+      shadow(x, y, rx, ry) {
+        ctx.save(); ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.clip();
+        ctx.strokeStyle = INK; ctx.globalAlpha = .35; ctx.lineWidth = 1;
+        for (let k = -rx * 2; k < rx * 2; k += 4) { ctx.beginPath(); ctx.moveTo(x + k, y + ry); ctx.lineTo(x + k + ry * 2, y - ry); ctx.stroke(); }
+        ctx.restore(); ctx.globalAlpha = 1;
+      },
+      text(s, x, y, size, c) { ctx.font = `${size + 5}px "Gochi Hand", "Comic Sans MS", cursive`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = c; ctx.fillText(s, x, y + 1); },
+      star(x, y, rad, c) { fillOutline(sub(starPts(x, y, rad)), c); },
+      finish() {
+        const g = rng(5);
+        for (let i = 0; i < 2600; i++) { ctx.fillStyle = g() > .5 ? 'rgba(60,40,20,.07)' : 'rgba(255,250,235,.10)'; ctx.fillRect(g() * W, g() * H, 1.4, 1.4); }
+      }
+    };
+    return d;
+  }
+
+  function pixel(ctx) {
+    const S = 3, lw = Math.ceil(W / S), lh = Math.ceil(H / S);
+    const off = document.createElement('canvas'); off.width = lw; off.height = lh;
+    const o = off.getContext('2d'); o.scale(1 / S, 1 / S);
+    const base = flat(o, 'sans-serif');
+    const pal = new Set(), texts = [];
+    const rec = c => { if (typeof c === 'string' && c[0] === '#') pal.add(c); return c; };
+    const SH = '#4f8c3e';
+    pal.add(SH);
+    const d = {
+      rect: (x, y, w, h, c, r) => base.rect(x, y, w, h, rec(c), r ? 3 : 0),
+      ellipse: (x, y, rx, ry, c) => base.ellipse(x, y, rx, ry, rec(c)),
+      poly: (p, c) => base.poly(p, rec(c)),
+      line: (p, c, w) => base.line(p, rec(c), Math.max(w, 3)),
+      ring: (x, y, r, c, w) => base.ring(x, y, r, rec(c), Math.max(w, 3)),
+      shadow: (x, y, rx, ry) => base.ellipse(x, y, rx, ry, SH),
+      text: (s, x, y, size, c) => texts.push([s, x, y, size, c]),
+      star: (x, y, r, c) => base.poly(starPts(x, y, r + 2), rec(c)),
+      finish() {
+        const P = [...pal].map(hex2rgb);
+        const img = o.getImageData(0, 0, lw, lh), a = img.data;
+        const g1 = hex2rgb(C.grass), g2 = hex2rgb(C.grass2), gd = hex2rgb(darken(C.grass, .12));
+        for (let i = 0; i < a.length; i += 4) {
+          let best = P[0], bd = 1e9;
+          for (const q of P) { const dd = (a[i] - q[0]) ** 2 + (a[i + 1] - q[1]) ** 2 + (a[i + 2] - q[2]) ** 2; if (dd < bd) { bd = dd; best = q; } }
+          const px = (i / 4) % lw, py = Math.floor(i / 4 / lw);
+          if (best === P.find(q => q[0] === g1[0] && q[1] === g1[1] && q[2] === g1[2]) && (px * 3 + py * 5) % 11 === 0) best = gd;
+          else if (best[0] === g2[0] && best[1] === g2[1] && best[2] === g2[2] && (px + py * 2) % 9 === 0) best = g1;
+          a[i] = best[0]; a[i + 1] = best[1]; a[i + 2] = best[2]; a[i + 3] = 255;
+        }
+        o.putImageData(img, 0, 0);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(off, 0, 0, lw * S, lh * S);
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        texts.forEach(([s, x, y, size, c]) => { ctx.font = `${Math.max(8, Math.round(size * .62))}px "Press Start 2P", monospace`; ctx.fillStyle = c; ctx.fillText(s, Math.round(x), Math.round(y + 1)); });
+      }
+    };
+    return d;
+  }
+
+  function draw(cv) {
+    const ctx = cv.getContext('2d');
+    ctx.setTransform(cv.width / W, 0, 0, cv.height / H, 0, 0);
+    const kind = cv.dataset.style;
+    const d = kind === 'flat' ? flat(ctx, '"Lilita One", system-ui, sans-serif') : kind === 'clay' ? clay(ctx) : kind === 'ink' ? ink(ctx) : pixel(ctx);
+    scene(d);
+    if (d.finish) d.finish();
+  }
+
+  const fonts = ['16px "Lilita One"', '600 16px Fredoka', '16px "Gochi Hand"', '16px "Press Start 2P"'];
+  const ready = document.fonts ? Promise.all(fonts.map(f => document.fonts.load(f).catch(() => null))) : Promise.resolve();
+  const all = () => document.querySelectorAll('canvas.scene').forEach(draw);
+  all();
+  ready.then(all);
+
+  document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', () => {
+    const code = document.getElementById(btn.dataset.for);
+    const done = () => { btn.textContent = 'Kopierad'; setTimeout(() => (btn.textContent = 'Kopiera prompt'), 1600); };
+    const select = () => { const r = document.createRange(); r.selectNodeContents(code); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Markerad, tryck Ctrl+C'; };
+    try { navigator.clipboard.writeText(code.textContent).then(done, select); } catch (e) { select(); }
+  }));
+})();
+</script>

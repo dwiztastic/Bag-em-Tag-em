@@ -100,7 +100,7 @@ snabbt mätaren fylls. Detta prövas i prototypen.
 - **Apple:** 99 USD per år. Granskningen tar normalt 1–3 dagar. "Alla åldrar" och köp i appen ger en åldersgräns enligt Apples formulär. Spelet har inga lootboxar, och det förenklar.
 
 ## Öppna frågor
-- Vilken grafikstil gäller? Rekommendationen ovan behöver ägarens godkännande.
+- Vilken grafikstil gäller? Se stilprovet i `docs/grafikstilar.html`: platt tecknad (AI 2/5), pixel (3/5), tusch (4/5) eller lera/3D (5/5).
 - Siffror och värden i `docs/katter.md` (poäng, byten, säck och tider) justeras när prototypen har provspelats.
 - Ska det finnas en veckotopplista utöver den totala?
 - Hur mycket är säcken värd i poäng? Exakta värden per sällsynthetsnivå sätts i prototypen.
