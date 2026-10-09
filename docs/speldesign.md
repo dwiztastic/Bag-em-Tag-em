@@ -14,6 +14,7 @@ förlorar man hela säcken.
 - Tonen är busig och humoristisk. Spelet passar alla åldrar: lätt att börja, svårt att bemästra.
 - Miljöerna är villaområde/bakgårdar och stad.
 - Webbläsare först, sedan App Store och Google Play. Det finns ingen Mac, så iOS byggs i molnet (se teknik).
+- **Språk: engelska** är spelets huvudspråk. Texterna ligger i en språkfil från början, så fler språk kan läggas till senare. Engelska namn på raser, godis och banor finns i `docs/katter.md`.
 
 ### Gubben
 - En kattfångare och samlare med håv och säck.
@@ -29,6 +30,7 @@ förlorar man hela säcken.
   - Arga hundar. Når en hund gubben snubblar han och förlorar några sekunder, och katterna i närheten flyr. Säcken påverkas inte.
 
 ### Katter
+Raser, färger, godis, uppdrag och banor finns i detalj i `docs/katter.md`. Det är godkänt 2026-10-09, inklusive gyllene katter, att Maine coon tar 2 platser, max 2 godisar per runda och upplåsning av banor via albumet.
 - Varje katt är en kombination av ras och färg. Både ras och färg påverkar värdet och sällsyntheten.
 - Raserna är blandade. Riktiga raser är de vanligare, och påhittade legendariska raser är de extremt sällsynta.
 - Vid lansering finns cirka 10 raser med 3–4 färger var, alltså 30–40 katter att samla. Fler läggs till via uppdateringar.
@@ -99,7 +101,7 @@ snabbt mätaren fylls. Detta prövas i prototypen.
 
 ## Öppna frågor
 - Vilken grafikstil gäller? Rekommendationen ovan behöver ägarens godkännande.
-- Lista med raser, godis, uppdrag och banor: utkast finns i `docs/katter.md`. Ägaren har inte godkänt det.
+- Siffror och värden i `docs/katter.md` (poäng, byten, säck och tider) justeras när prototypen har provspelats.
 - Ska det finnas en veckotopplista utöver den totala?
 - Hur mycket är säcken värd i poäng? Exakta värden per sällsynthetsnivå sätts i prototypen.
 
