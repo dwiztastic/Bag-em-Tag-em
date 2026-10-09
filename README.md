@@ -5,3 +5,4 @@ Ett extraction-spel där man jagar katter. Det byggs för webbläsaren och ska s
 - Speldesign: [docs/speldesign.md](docs/speldesign.md)
 - Katter, godis och banor: [docs/katter.md](docs/katter.md)
 - Status: [docs/status.md](docs/status.md)
+- Prototyp: [prototyp/README.md](prototyp/README.md)

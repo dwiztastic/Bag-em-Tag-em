@@ -20,6 +20,7 @@ för iOS och Android. Ägaren har ingen spelutvecklingsvana – Claude Code bygg
 - Appar (fas 4): Capacitor. Köp i appen via RevenueCat.
 - iOS byggs i molnet (Codemagic/GitHub Actions) – ägaren har ingen Mac.
 - Kräver Node.js LTS. Alla datorer har det inte – kontrollera med `node --version` först.
+- **Undantag nu:** prototypen i `prototyp/` är vanlig JavaScript med Phaser 3.80.1 från cdnjs och har inget byggsteg (det fanns ingen Node). Den testas med `verktyg/serve.ps1`, se `prototyp/README.md`. Den flyttas till Vite + TypeScript när det finns Node.
 
 ## Regler
 - **Spelet är på engelska** (huvudspråk, beslutat 2026-10-09). Alla texter i spelet skrivs på engelska och läggs i en språkfil, aldrig direkt i koden. Då går det att lägga till fler språk, till exempel svenska, senare.
