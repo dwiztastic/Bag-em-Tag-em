@@ -90,7 +90,7 @@ eller rör sig ryckigt. Man måste smyga, det vill säga dra joysticken bara lit
 sig från sidan. När man är nära nog kommer ett tryck vid rätt tillfälle. Godis sänker hur
 snabbt mätaren fylls. Detta prövas i prototypen.
 
-### Grafik: rekommendation
+### Grafik: tidigare rekommendation (ersatt 2026-10-09 – se beslutet under "Utseende och plattform")
 - **Pixelgrafik ovanifrån.** Stilen passar busig humor och laddar snabbt. Det finns också färdiga, enhetliga grafikpaket för just villaområden och stad ovanifrån, till exempel LimeZus "Modern Exteriors" på itch.io för några hundralappar.
 - **Miljöer:** köpta grafikpaket. Det ger en enhetlig stil direkt och är billigt.
 - **Katter:** en grundfigur per ras. **Färgerna läggs på i koden** (palettbyte), så 10 figurer räcker för 30–40 katter. Raserna kan ritas med AI som utgångspunkt och sedan städas, eller beställas av en pixelartist. Cirka 10 figurer är en överkomlig beställning.
