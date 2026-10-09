@@ -1,12 +1,15 @@
 # Status
 
 ## Nu
-Fas 0 är klar. Speldesignen är intervjuad och dokumenterad, och repot är skapat.
+Speldesignen är nästan klar. Genomförbarheten är bedömd och allt går att bygga. De öppna frågorna som återstår är innehåll: raser, godis, uppdrag och banor.
 
 ## Nästa steg
-- Fas 1: bygga en prototyp i webbläsaren med Phaser, Vite och TypeScript.
-  Den ska ha en bana, 3–4 raser, joystick, timer, säck och utgång.
+1. Ta fram utkast till listorna med raser och godis, och få dem godkända av ägaren.
+2. Ägaren godkänner eller ändrar grafikrekommendationen.
+3. Fas 1, prototypen, byggs på en dator som har **Node.js**. Den här datorn saknar Node och kan inte få det installerat.
+   - Installera med `winget install OpenJS.NodeJS.LTS` och starta sedan om Claude.
 
 ## Logg
 - 2026-10-09: Intervju del 1–3 genomförd. `CLAUDE.md` och speldesignen skapade.
 - 2026-10-09: Namnet bestämt: Bag em & Tag em. Repot pushat till GitHub (dwiztastic/Bag-em-Tag-em, privat).
+- 2026-10-09: Fördjupande intervju genomförd: miljö, gubbe, ton, poäng, godis, hundar, ljud och spelarkort. Genomförbarhetsanalys och grafikrekommendation tillagda i speldesignen.

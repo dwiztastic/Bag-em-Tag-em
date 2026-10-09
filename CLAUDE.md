@@ -18,6 +18,8 @@ för iOS och Android. Ägaren har ingen spelutvecklingsvana – Claude Code bygg
 - Spelmotor: Phaser 3 + TypeScript, byggs med Vite.
 - Backend (fas 3): Cloudflare Workers + D1 för topplista och spelarkort.
 - Appar (fas 4): Capacitor. Köp i appen via RevenueCat.
+- iOS byggs i molnet (Codemagic/GitHub Actions) – ägaren har ingen Mac.
+- Kräver Node.js LTS. Alla datorer har det inte – kontrollera med `node --version` först.
 
 ## Regler
 - Svenska i dokument och spelets texter.
