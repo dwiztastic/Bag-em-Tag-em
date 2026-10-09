@@ -12,6 +12,8 @@ förlorar man hela säcken.
 ### Utseende och plattform
 - 2D sett ovanifrån, med liggande skärm.
 - Tonen är busig och humoristisk. Spelet passar alla åldrar: lätt att börja, svårt att bemästra.
+- **Grafik: platt tecknad stil som Claude ritar i kod** (beslutat 2026-10-09). Inga AI-bildtjänster, betalda program eller anlitade illustratörer. Figurerna byggs av delar med inställningar för ras, färg, mönster och skin, och animeras genom att delarna rör sig. Se stilprovet i `docs/grafikstilar.html`. Ett köpt grafikpaket kan bli aktuellt först inför lansering i butikerna.
+- **Ljud:** effektljud skapas i kod (Web Audio). Jamanden och musik hämtas från gratisbibliotek med CC0-licens.
 - Miljöerna är villaområde/bakgårdar och stad.
 - Webbläsare först, sedan App Store och Google Play. Det finns ingen Mac, så iOS byggs i molnet (se teknik).
 - **Språk: engelska** är spelets huvudspråk. Texterna ligger i en språkfil från början, så fler språk kan läggas till senare. Engelska namn på raser, godis och banor finns i `docs/katter.md`.
@@ -100,7 +102,7 @@ snabbt mätaren fylls. Detta prövas i prototypen.
 - **Apple:** 99 USD per år. Granskningen tar normalt 1–3 dagar. "Alla åldrar" och köp i appen ger en åldersgräns enligt Apples formulär. Spelet har inga lootboxar, och det förenklar.
 
 ## Öppna frågor
-- Vilken grafikstil gäller? Se stilprovet i `docs/grafikstilar.html`: platt tecknad (AI 2/5), pixel (3/5), tusch (4/5) eller lera/3D (5/5).
+
 - Siffror och värden i `docs/katter.md` (poäng, byten, säck och tider) justeras när prototypen har provspelats.
 - Ska det finnas en veckotopplista utöver den totala?
 - Hur mycket är säcken värd i poäng? Exakta värden per sällsynthetsnivå sätts i prototypen.

@@ -24,5 +24,6 @@ för iOS och Android. Ägaren har ingen spelutvecklingsvana – Claude Code bygg
 ## Regler
 - **Spelet är på engelska** (huvudspråk, beslutat 2026-10-09). Alla texter i spelet skrivs på engelska och läggs i en språkfil, aldrig direkt i koden. Då går det att lägga till fler språk, till exempel svenska, senare.
 - Dokumenten i `docs/` och samtalet med ägaren är på svenska.
+- All grafik ritas i kod (platt tecknad stil) – inga externa bilder utan att ägaren godkänt det. Kattfigurer byggs av delar med inställningar, inte en bild per katt.
 - Rättvisa: inget som går att köpa får ge fördelar i spelet – bara kosmetik.
 - Topplistan måste tåla fusk: servern ska äga slumpen och rimlighetskontrollera resultat.
